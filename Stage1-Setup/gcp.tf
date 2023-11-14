@@ -25,19 +25,21 @@ module "demo-nov-2023_folder" {
 module "main_project" {
   source = "github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/project?ref=v24.0.0"
 
-  billing_account = var.gcp_billing_account_id
-  name            = "main-${random_integer.project_number.result}"
-  parent          = module.demo-nov-2023_folder.folder.id
-  services        = var.enabled_services
+  billing_account     = var.gcp_billing_account_id
+  name                = "main-${random_integer.project_number.result}"
+  parent              = module.demo-nov-2023_folder.folder.id
+  services            = var.enabled_services
+  auto_create_network = true
 }
 
 module "service_accounts_project" {
   source = "github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/project?ref=v24.0.0"
 
-  billing_account = var.gcp_billing_account_id
-  name            = "hug-sas-${random_integer.project_number.result}"
-  parent          = data.google_organization.org.name
-  services        = var.enabled_services
+  billing_account     = var.gcp_billing_account_id
+  name                = "hug-sas-${random_integer.project_number.result}"
+  parent              = data.google_organization.org.name
+  services            = var.enabled_services
+  auto_create_network = true
   org_policies = {
     "iam.disableServiceAccountKeyCreation" = {
       rules = [{ enforce = false }]

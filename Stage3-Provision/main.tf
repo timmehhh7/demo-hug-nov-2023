@@ -10,8 +10,9 @@ data "vault_azure_access_credentials" "creds" {
   validate_creds              = true
   num_sequential_successes    = 3
   num_seconds_between_tests   = 1
-  max_cred_validation_seconds = 300
+  max_cred_validation_seconds = 120
   subscription_id             = "7a517e97-91a1-4629-81c4-f65dfe169f57"
+  tenant_id                   = "4328f5c5-4e1f-4b4d-b5ee-604e7fe12ccf"
 }
 
 data "vault_generic_secret" "creds" {
@@ -19,7 +20,7 @@ data "vault_generic_secret" "creds" {
 }
 
 resource "aws_instance" "demo" {
-  ami           = "ami-04e914639d0cca79a"
+  ami           = "ami-06873c81b882339ac"
   instance_type = "t2.micro"
   # Ubuntu Server 22.04 LTS (HVM), SSD Volume Type
   tags = {
@@ -79,7 +80,9 @@ resource "azurerm_linux_virtual_machine" "demo" {
   }
 
   computer_name  = "demo-instance"
+  disable_password_authentication = false
   admin_username = "demo"
+  admin_password = "Demo$1234"
 
   #   admin_ssh_key {
   #     username   = var.username
@@ -92,7 +95,7 @@ resource "azurerm_linux_virtual_machine" "demo" {
 }
 
 resource "google_compute_instance" "demo" {
-  project      = "main-341"
+  project      = "main-499"
   name         = "demo-instance"
   machine_type = "n1-standard-1"
   zone         = "northamerica-northeast1-a"
