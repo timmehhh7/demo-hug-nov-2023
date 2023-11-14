@@ -1,9 +1,9 @@
 resource "vault_gcp_secret_backend" "gcp" {
   credentials               = file("creds/vault-secret-gcp.json")
-  path = "gcp-demo"
+  path                      = "gcp-demo"
   description               = "Demo GCP Backend"
   default_lease_ttl_seconds = "300"
-  max_lease_ttl_seconds     = "3600"
+  max_lease_ttl_seconds     = "900"
 }
 
 resource "vault_gcp_secret_roleset" "demo" {

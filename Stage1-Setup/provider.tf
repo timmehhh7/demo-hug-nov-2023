@@ -1,12 +1,6 @@
-provider "google" {
-}
+provider "google" {}
 
-provider "vault" {
-  address = "https://vault.control.acceleratorlabs.ca"
-}
-
-provider "aws" {
-}
+provider "aws" {}
 
 provider "azuread" {}
 
@@ -35,10 +29,6 @@ terraform {
     google = {
       source  = "hashicorp/google"
       version = "5.5.0"
-    }
-    vault = {
-      source  = "hashicorp/vault"
-      version = "3.21.0"
     }
   }
   required_version = ">= 1.1"
